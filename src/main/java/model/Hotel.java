@@ -8,7 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 public class Hotel {
 
     String price;
+
     String name;
+
     Address address;
 
     public Hotel() {
