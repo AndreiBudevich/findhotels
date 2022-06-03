@@ -1,6 +1,7 @@
 package util;
 
 import model.Hotel;
+import to.Report;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,19 @@ public class HotelUtil {
         abbreviatedNamesOfStates.put("New York", "NY");
     }
 
+    private HotelUtil() {
+    }
+
+    public static Report get (List<Hotel> hotels) {
+        Report report = new Report();
+        hotels.forEach(hotel -> {
+            report.getNames().add(hotel.getName());
+            report.getPrices().add(hotel.getPrice());
+            report.getAddresses().add(hotel.getAddress().getAddressLine());
+        });
+        return report;
+    }
+
     public static List<Hotel> getSorted(List<Hotel> hotels, String name, String state) {
         return hotels.stream()
                 .filter(hotel -> hotel.getName().toLowerCase().contains(name.toLowerCase()))
@@ -25,8 +39,5 @@ public class HotelUtil {
 
     private static boolean checkState(String hotelState, String currentState) {
         return hotelState.equalsIgnoreCase(currentState) || hotelState.equalsIgnoreCase(abbreviatedNamesOfStates.get(currentState));
-    }
-
-    private HotelUtil() {
     }
 }
