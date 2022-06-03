@@ -1,19 +1,33 @@
 package util;
 
 
-import model.Hotel;
-import model.Hotels;
-
-import javax.xml.bind.*;
+import javax.xml.bind.JAXB;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import java.io.File;
-import java.util.List;
+import java.io.StringWriter;
 
 public class XmlUtil {
 
-    public static List<Hotel> deserializeToXML(String path) {
-        return JAXB.unmarshal(new File(path), Hotels.class).getHotels();
-    }
+    private static final StringWriter writer = new StringWriter();
 
     private XmlUtil() {
+    }
+
+    public static <T> T deserializeToXML(String path, Class<T> clazz) {
+        return JAXB.unmarshal(new File(path), clazz);
+    }
+
+    public static <T> String serializeToXML(T object, Class<T> clazz) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(clazz);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            marshaller.marshal(object, writer);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return writer.toString();
     }
 }
