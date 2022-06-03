@@ -6,21 +6,18 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType
 public class Address {
 
-    @XmlElement(name = "AddressLine")
     private String addressLine;
 
-    @XmlElement(name = "City")
     private String city;
 
-    @XmlElement(name = "Country")
     private String country;
 
-    @XmlElement(name = "State")
     private String state;
 
     public Address() {
     }
 
+    @XmlElement(name = "AddressLine")
     public String getAddressLine() {
         return addressLine;
     }
@@ -29,6 +26,7 @@ public class Address {
         this.addressLine = addressLine;
     }
 
+    @XmlElement(name = "City")
     public String getCity() {
         return city;
     }
@@ -37,6 +35,7 @@ public class Address {
         this.city = city;
     }
 
+    @XmlElement(name = "Country")
     public String getCountry() {
         return country;
     }
@@ -45,6 +44,7 @@ public class Address {
         this.country = country;
     }
 
+    @XmlElement(name = "State")
     public String getState() {
         return state;
     }
