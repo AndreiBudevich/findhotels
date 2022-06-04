@@ -1,9 +1,12 @@
 package to;
 
+import util.PriceAdapter;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +16,7 @@ public class Report {
 
     private List<String> names;
 
-    private List<String> prices;
+    private List<Long> prices;
 
     private List<String> addresses;
 
@@ -35,11 +38,12 @@ public class Report {
 
     @XmlElementWrapper(name = "Prices", nillable = true)
     @XmlElement(name = "Price")
-    public List<String> getPrices() {
+    @XmlJavaTypeAdapter(PriceAdapter.class)
+    public List<Long> getPrices() {
         return prices;
     }
 
-    public void setPrices(List<String> prices) {
+    public void setPrices(List<Long> prices) {
         this.prices = prices;
     }
 

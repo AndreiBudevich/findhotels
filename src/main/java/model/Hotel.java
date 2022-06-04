@@ -1,13 +1,16 @@
 package model;
 
+import util.PriceAdapter;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlType(name = "Hotel", propOrder = {"name", "address"})
 public class Hotel {
 
-    String price;
+    Long price;
 
     String name;
 
@@ -17,11 +20,12 @@ public class Hotel {
     }
 
     @XmlAttribute(name = "Price")
-    public String getPrice() {
+    @XmlJavaTypeAdapter(PriceAdapter.class)
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 
